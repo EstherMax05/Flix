@@ -84,7 +84,6 @@ class MovieTableViewController: UITableViewController {
             self.movies = dataDictionary[Constants.movieResultsApiId] as! [[String:Any]]
 //            self.tableView.reloadData()
               self.isDoneLoading = true
-            print("fdsafdsdadsa")
            }
         }
         task.resume()
