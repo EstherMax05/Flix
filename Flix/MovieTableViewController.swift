@@ -51,7 +51,7 @@ class MovieTableViewController: UITableViewController {
     }
     
     // MARK: - Helper function to get image from web, given a URL
-    func getImage(key: String, index: Int, resolution: Int = 185) -> UIImage? {
+    func getImage(key: String, index: Int, resolution: Int = Constants.imageLowRes) -> UIImage? {
         let baseUrlPath = Constants.baseUrlImagePathApi + "\(resolution)"
         let posterUrlPath = movies[index][key] as! String
         // let posterURL = URL(string: baseUrlPath+posterUrlPath)
@@ -100,7 +100,7 @@ class MovieTableViewController: UITableViewController {
         let trailerUrl = URL(string:Constants.baseUrlMoviePathApi+"\(movieId)/"+Constants.videoSectionApi+Constants.apiKey)
         if segue.identifier == Constants.movieDetailViewSegueId {
             let vc = segue.destination as! MovieDetailViewController
-            vc.movieDetail = MovieDetail(posterImage: cell.moviePosterImageView.image, backdropImage: getImage(key: Constants.movieBackdropApiId, index: indexPath!.row, resolution: 780), title: cell.movieTitleLabel.text, overview: cell.movieDetailLabel.text, trailer: trailerUrl)
+            vc.movieDetail = MovieDetail(posterImage: cell.moviePosterImageView.image, backdropImage: getImage(key: Constants.movieBackdropApiId, index: indexPath!.row, resolution: Constants.imageHiRes), title: cell.movieTitleLabel.text, overview: cell.movieDetailLabel.text, trailer: trailerUrl)
         }
     }
 

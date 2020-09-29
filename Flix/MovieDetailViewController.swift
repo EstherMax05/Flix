@@ -23,6 +23,7 @@ class MovieDetailViewController: UIViewController {
     var movieDetail : MovieDetail!
     
     @IBOutlet weak var overviewScrollView: UIScrollView!
+    @IBOutlet var innerView: UIView!
     
     @IBAction func watchTrailerTapped(_ sender: UIButton) {
         
@@ -30,12 +31,15 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        posterImageView.layer.cornerRadius = 20
+        posterImageView.layer.cornerRadius = Constants.posterCornerRadius
         posterImageView.image = movieDetail.posterImage
         backdropImageView.image = movieDetail.backdropImage
         movieTitleLabel.text = movieDetail.title
         movieOverviewLabel.text = movieDetail.overview
-        overviewScrollView.contentSize = CGSize(width: movieOverviewLabel.frame.width, height: movieOverviewLabel.frame.maxY)
+        print("overviewScrollView.contentSize ", overviewScrollView.contentSize)
+        overviewScrollView.contentSize = CGSize(width: self.view.frame.width, height: innerView.frame.maxY)
+        print("overviewScrollView.contentSiz2e ", overviewScrollView.contentSize)
+        print("movieOverviewLabel.frame.maxY ", movieOverviewLabel.frame.maxY, " ",  innerView.frame.maxY, " ", self.view.frame.maxY)
         // Do any additional setup after loading the view.
     }
     

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constants {
     static let loadingCellId = "loadingCell"
@@ -25,4 +26,5 @@ struct Constants {
     static let imageLowRes = 185
     static let genericFailedMessage = "Error: process failed"
     static let movieApiId = "id"
+    static let posterCornerRadius : CGFloat = 20
 }

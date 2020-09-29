@@ -17,7 +17,7 @@ class MovieCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // TODO: - change moviePosterImageView layer cornerRadius from literal to calculated item
-        moviePosterImageView.layer.cornerRadius = 35
+        moviePosterImageView.layer.cornerRadius = Constants.posterCornerRadius
         moviePosterImageView.clipsToBounds = true
     }
 
