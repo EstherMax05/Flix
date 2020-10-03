@@ -20,10 +20,20 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieOverviewLabel: UILabel!
     @IBOutlet weak var watchTrailerButton: UIButton!
+    @IBOutlet var didTap: UITapGestureRecognizer!
     var movieDetail : MovieDetail!
+    var trailerResults = [[String:Any]]()
+    var trailerKey = ""
     
     @IBOutlet weak var overviewScrollView: UIScrollView!
     @IBOutlet var innerView: UIView!
+    @IBAction func didTapPoster(_ sender: UITapGestureRecognizer) {
+        print("Tapppeddddddd")
+        if didTap.state == .ended {
+            print("Tapppeddddddasfsaffsdfdsd")
+        }
+        performSegue(withIdentifier: "trailerSegue", sender: nil)
+    }
     
     @IBAction func watchTrailerTapped(_ sender: UIButton) {
         
@@ -41,6 +51,7 @@ class MovieDetailViewController: UIViewController {
         print("overviewScrollView.contentSiz2e ", overviewScrollView.contentSize)
         print("movieOverviewLabel.frame.maxY ", movieOverviewLabel.frame.maxY, " ",  innerView.frame.maxY, " ", self.view.frame.maxY)
         // Do any additional setup after loading the view.
+        callNetwork(url : movieDetail.trailer!)
     }
     
 
@@ -51,6 +62,30 @@ class MovieDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "trailerSegue" {
+            let viewController = segue.destination as! TrailerViewController
+            viewController.videoId = trailerResults[0]["key"] as! String
+            
+        }
+    }
+    
+    func callNetwork(url : URL, key : String = "results") {
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: request) { (data, response, error) in
+           // This will run when the network request returns
+           if let error = error {
+                print(Constants.genericFailedMessage)
+                print(error.localizedDescription)
+           } else if let data = data {
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                self.trailerResults = dataDictionary[key] as! [[String:Any]]
+                print("trailerResults ", dataDictionary[key] as! [[String:Any]])
+                print("trailerResults URL ", url)
+           }
+        }
+        task.resume()
+        print("trailerResults.count ", trailerResults)
     }
     
 

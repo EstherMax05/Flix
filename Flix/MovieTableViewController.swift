@@ -82,7 +82,6 @@ class MovieTableViewController: UITableViewController {
            } else if let data = data {
               let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
             self.movies = dataDictionary[Constants.movieResultsApiId] as! [[String:Any]]
-//            self.tableView.reloadData()
               self.isDoneLoading = true
            }
         }

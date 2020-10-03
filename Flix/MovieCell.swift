@@ -18,6 +18,8 @@ class MovieCell: UITableViewCell {
         super.awakeFromNib()
         // TODO: - change moviePosterImageView layer cornerRadius from literal to calculated item
         moviePosterImageView.layer.cornerRadius = Constants.posterCornerRadius
+        moviePosterImageView.layer.borderWidth = 0.5
+        moviePosterImageView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         moviePosterImageView.clipsToBounds = true
     }
 
